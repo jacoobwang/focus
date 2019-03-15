@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>扫到什么，评论什么</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="http://media.youshu.cc/static/css/style.css">
+    <link href="http://new1.niugu.net/public/css/shareapp/gxapppack.css" rel="stylesheet" type="text/css"/>    
+    <link href="http://new1.niugu.net/public/css/animate.css" rel="stylesheet" type="text/css"/>    
+    <script src="http://new1.niugu.net/public/js/clipboard.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<style type="text/css">
+  .t-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+  }
+  .thumb {
+    height: 100px;
+  }
+  .content-outer {
+    height: 120px;
+  }
+</style>
+<body>
+
+<div class="wrapper">
+    <div class="t-wrapper">
+      <img class="thumb" src="http://m.qpic.cn/psb?/V13nsnNS4T2sYb/7Pw7qCVgQkmBwnsHXR6gPI41JOt4A4Qnp4ElOJpDR7U!/b/dFMBAAAAAAAA&bo=OASFBQAAAAARF5w!&rf=viewer_4" />
+    </div>
+    <div class="content-outer">
+      <div class="content animated pulse"></div>
+    </div>
+    <div class="btn-group">
+        <a class="btn btn-copy"></a>
+        <!-- <a class="btn btn-play" href="http://mp.weixin.qq.com/s/eeITNnOxdkGHznuFFmTc7Q"></a> -->
+    </div>
+</div>
+
+<script>
+    var datar = [
+    "明天请我吃饭",
+    "你走，我不送你；<br/>你来，多大风多大雨，<br/>我也要去阻止你。",
+    "假如生活欺骗了你，<br/>不要忧郁，不要哀伤，<br/>这还只是个开始。",
+    "你是电，你是光，<br/>你是唯一的智障。",
+    "生活不止眼前的苟且，<br/>还有明天和后天的苟且。",
+    "你长的这么没好看，<br/>除了当我对象还有什么卵用。",
+    "都说认真的男人最帅，<br/>你认真的样子像天桥上贴膜的。",
+    "喜欢你就是，<br/>我发的所有朋友圈都是给你看的呀。",
+    "我养你啊",
+    "来，<br/>我们床上聊",
+    "你为什么天天找我说话，<br/>想睡我吗？",
+    "你喜不喜欢我，<br/>不喜欢我我再想想办法。",
+    "青春荒唐不负你，<br/>全套包夜八百起。",
+    "趁着年轻多吃苦，<br/>这样你老了才能吃更多苦。",
+    "从此我爱的人都像你。",
+    "有空一起睡觉啊？",
+    "你个磨人的小妖精。",
+    "比你聪明的人都在努力，<br/>那你努力有什么用？",
+    "不要想着咸鱼翻身，<br/>翻了也还是咸鱼",
+    "不要抱怨那些击倒你的人，<br/>他们也许只是想让你知道，<br/>躺着其实也挺舒服的",
+    "我没有去过你的城市，<br/>但是我刷过你那的题",
+    "我们不要再见面了，<br/>洗头好累，<br/>洗发水好贵",
+    "建议你对自己的长相，<br/>理解为主<br/>欣赏为辅",
+    "陪你喝酒的人，<br/>注定无法送你回家，<br/>但是可以去开房",
+    "你不是真正的快乐，<br/>我是",
+    "以后的路你自己走，<br/>我打车",
+    "你现在不喜欢我，<br/>我告诉你，<br/>过了这个村，<br/>我在下个村等你",
+    "你会不会突然的出现，<br/>在街角的大保健",
+    "想陪在你身边，<br/>如果有人敢欺负你，<br/>我就能第一个鼓掌",
+    "我一定要追到你，<br/>不然我白长这么好看了"
+    ];
+    //跳转url数组
+    var dataUrl=["https://mp.weixin.qq.com/s/iAx93uSd-qpzud-AOIXwRA","http://mp.weixin.qq.com/s/81Ev7QQSumMgd72c3JpsKA","http://mp.weixin.qq.com/s/V_6izGS11tH6GGeQvSx9RQ","http://mp.weixin.qq.com/s/SEgx_mvF6eKsYNdIYaX_wA","http://mp.weixin.qq.com/s/AuFVGAEF0JQ5snykyPCZnQ","https://mp.weixin.qq.com/s/LMS0tdBe_5MO7FSHecT41g"];
+    var shareTitle = '';
+    var shareUrl   = '';
+    var shareDesc  = '';
+    var shareImg   = '';
+    var select = datar[Math.floor(datar.length*Math.random())];
+    $(".content").html(select)
+
+</script>
+<script type="application/javascript">
+    $(function (){
+        //图片自适应
+        var btnW = $(window).width() / (640 / 340);
+        var btnH = btnW / (340 / 70);
+        $('.btn').width(btnW).height(btnH);
+        $('.btn-play').css({
+            'margin-top' : $(window).width() / (640 / 50)
+        });
+
+        //复制内容到粘贴板
+        $('.btn-copy').on('click', function ()
+        {
+            new Clipboard('.btn', {
+                text : function ()
+                {
+                    return select.replace(/<br\/>/g,"");
+                }
+            });
+            $(this).toggleClass('btn-copy-click');
+            setTimeout(function ()
+            {
+                alert("已复制");
+            }, 300);
+        });
+
+        $('.btn-play').on('click', function ()
+        {
+            $(this).toggleClass('btn-play-click');
+        });
+
+    });
+</script>
+<div style="display: none">
+<script>
+// var _hmt = _hmt || [];
+// (function() {
+//   var hm = document.createElement("script");
+//   hm.src = "https://hm.baidu.com/hm.js?75e4f040ece0261ed3276a9d1e1e2bd5";
+//   var s = document.getElementsByTagName("script")[0]; 
+//   s.parentNode.insertBefore(hm, s);
+// })();
+</script>
+</div>
+</body>
+</html> 
